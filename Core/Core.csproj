@@ -31,12 +31,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-
   <Target Name="ZipBuild" AfterTargets="AfterBuild">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\UnityAudio\" />
     <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(RootNamespace).zip" Overwrite="true" />
   </Target>
-
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

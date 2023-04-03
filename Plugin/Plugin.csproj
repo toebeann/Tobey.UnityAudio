@@ -4,7 +4,7 @@
     <TargetFramework>net35</TargetFramework>
     <AssemblyName>Tobey.UnityAudio.Plugin</AssemblyName>
     <Description>Attempts to play a sound at the camera once the game has loaded</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>latest</LangVersion>
     <Product>Unity Audio Patcher</Product>

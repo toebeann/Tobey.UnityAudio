@@ -35,30 +35,16 @@
     <WarningLevel>4</WarningLevel>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
-
   <Target Name="ZipBuild" AfterTargets="ILRepack">
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="..\bin\zip\BepInEx\patchers\Tobey\UnityAudio\" />
     <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(RootNamespace).zip" Overwrite="true" />
   </Target>
-
   <ItemGroup>
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
-    <Reference Include="System.Core">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Data">
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System.Xml">
-      <Private>False</Private>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
