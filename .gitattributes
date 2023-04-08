@@ -2,3 +2,4 @@
 * text=auto
 * text eol=lf
 *.wav binary
+*.tpk binary
