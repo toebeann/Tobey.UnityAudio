@@ -103,7 +103,17 @@ public static class Patcher
             .Distinct()
             .Where(path => excludedAssemblyPrefixes.All(prefix => !Path.GetFileNameWithoutExtension(path).StartsWith(prefix)))
             .Where(path => ExcludedAssemblies.All(assembly => Path.GetFileNameWithoutExtension(assembly) != Path.GetFileNameWithoutExtension(path)))
-            .SelectMany(path => AssemblyDefinition.ReadAssembly(path).Modules)
+            .SelectMany(path =>
+            {
+                try
+                {
+                    return AssemblyDefinition.ReadAssembly(path).Modules;
+                }
+                catch
+                {   // if we couldn't read the assembly it's probably not a .NET assembly anyway, so just ignore it
+                    return Enumerable.Empty<ModuleDefinition>();
+                }
+            })
             .SelectMany(module => module.GetTypeReferences())
             .Select(typeRef => typeRef.FullName)
             .Any(typeRefName => typeRefName.StartsWith("UnityEngine.Audio") || AdditionalTypeNames.Contains(typeRefName));
