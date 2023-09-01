@@ -22,7 +22,7 @@ public static class Patcher
 
     private static readonly Assembly assembly = Assembly.GetExecutingAssembly();
     private static readonly string globalGameManagersPath = Path.Combine(Directory.GetParent(Paths.ManagedPath).FullName, "globalgamemanagers");
-    private static readonly ManualLogSource logger = Logger.CreateLogSource("UnityAudioPatcher");
+    private static readonly ManualLogSource logger = Logger.CreateLogSource("Unity Audio Patcher");
 
     private static readonly ConfigFile config = new(Path.Combine(Paths.ConfigPath, BepinexConfigData.FileName), true);
 
