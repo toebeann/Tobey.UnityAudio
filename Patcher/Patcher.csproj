@@ -78,9 +78,9 @@
     <EmbeddedResource Include="Resources\classdata.tpk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{860cad40-325a-47f5-9aea-1d9873902102}</Project>
-      <Name>Core</Name>
+      <Name>Shared</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

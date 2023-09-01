@@ -47,7 +47,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\Shared\Shared.csproj">
       <Private>False</Private>
       <CopyLocalSatelliteAssemblies>False</CopyLocalSatelliteAssemblies>
     </ProjectReference>
