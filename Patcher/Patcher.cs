@@ -21,11 +21,9 @@ public static class Patcher
     #endregion
 
     private static readonly Assembly assembly = Assembly.GetExecutingAssembly();
-
-    private static readonly string cachePath = Path.Combine(Paths.CachePath, $"{Path.GetFileNameWithoutExtension(assembly.Location)}.dat");
     private static readonly string globalGameManagersPath = Path.Combine(Directory.GetParent(Paths.ManagedPath).FullName, "globalgamemanagers");
-
     private static readonly ManualLogSource logger = Logger.CreateLogSource("UnityAudioPatcher");
+
     private static readonly ConfigFile config = new(Path.Combine(Paths.ConfigPath, BepinexConfigData.FileName), true);
 
     private static readonly ConfigEntry<bool> configPatchEnabled = config.Bind(
@@ -76,19 +74,6 @@ public static class Patcher
         .Select(name => name.Trim())
         .Distinct();
 
-    private static Cache GetCache()
-    {
-        try
-        {
-            return Cache.LoadFromFile(cachePath);
-        }
-        catch
-        {
-            logger.LogDebug($"Cache not found or data invalid, creatig new cache at {Path.GetFullPath(cachePath)}");
-            return new();
-        }
-    }
-
     private static bool HasUnityAudioReferences()
     {
         var excludedAssemblyPrefixes = new[]
@@ -98,7 +83,7 @@ public static class Patcher
         };
 
         return AssemblySearchPaths
-            .Where(path => Directory.Exists(path))
+            .Where(Directory.Exists)
             .SelectMany(path => Directory.GetFiles(path, "*.dll", SearchOption.AllDirectories))
             .Distinct()
             .Where(path => excludedAssemblyPrefixes.All(prefix => !Path.GetFileNameWithoutExtension(path).StartsWith(prefix)))
@@ -127,18 +112,6 @@ public static class Patcher
         _ => !HasUnityAudioReferences()
     };
 
-    private static void UpdateAndSaveGlobalGameManagersCache()
-    {
-        var cache = GetCache();
-        cache.GlobalGameManagers = new()
-        {
-            UnityAudioDisabled = IntendedDisableAudioSetting(),
-            LastWriteTimestampTicks = File.GetLastWriteTimeUtc(globalGameManagersPath).Ticks
-        };
-        cache.SaveToFile(cachePath);
-        logger.LogInfo("Cache updated.");
-    }
-
     // this is our entry method into the patch
     public static void Finish()
     {
@@ -158,17 +131,6 @@ public static class Patcher
 
         logger.LogInfo($"{(intendedDisableAudioSetting ? "Disabling" : "Enabling")} Unity Audio...");
 
-        // check the cache to check the unity audio setting from the last time we inspected/wrote to the file
-        // if the write time of the file matches the timestamp from the cache AND the setting in the cache matches
-        // the intended setting, skip patching as it would be redundant
-        var cache = GetCache();
-        if (cache.GlobalGameManagers.LastWriteTimestampTicks == File.GetLastWriteTimeUtc(globalGameManagersPath).Ticks &&
-            cache.GlobalGameManagers.UnityAudioDisabled == intendedDisableAudioSetting)
-        {
-            logger.LogInfo($"Cached Unity Audio is already {(intendedDisableAudioSetting ? "disabled" : "enabled")}, skipping patching.");
-            return;
-        }
-
         try
         {
             using var classPackageStream = assembly.GetManifestResourceStream(assembly.GetManifestResourceNames().Single(name => name.ToLowerInvariant().EndsWith("classdata.tpk")));
@@ -181,10 +143,9 @@ public static class Patcher
             var baseField = manager.GetBaseField(ggmInstance, audioManager);
             var disableAudio = baseField["m_DisableAudio"];
 
-            if (disableAudio.AsBool == intendedDisableAudioSetting) // if setting in ggm already matches intended, just update cache and exit
+            if (disableAudio.AsBool == intendedDisableAudioSetting) // if setting in ggm already matches intended, just exit
             {
-                logger.LogInfo($"Unity Audio is already {(intendedDisableAudioSetting ? "disabled" : "enabled")}, updating cache and skipping patching.");
-                UpdateAndSaveGlobalGameManagersCache();
+                logger.LogInfo($"Unity Audio is already {(intendedDisableAudioSetting ? "disabled" : "enabled")}, skipping patching.");
                 return;
             }
 
@@ -207,9 +168,7 @@ public static class Patcher
             File.Delete(globalGameManagersPath);
             File.Move(tempPath, globalGameManagersPath);
 
-            // log success and update cache
-            logger.LogMessage($"Unity Audio successfully {(intendedDisableAudioSetting ? "disabled" : "enabled")}, updating cache.");
-            UpdateAndSaveGlobalGameManagersCache();
+            logger.LogMessage($"Unity Audio successfully {(intendedDisableAudioSetting ? "disabled" : "enabled")}.");
         }
         catch (Exception exception)
         {
