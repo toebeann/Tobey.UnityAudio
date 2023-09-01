@@ -1,5 +1,4 @@
 ﻿using BepInEx.Configuration;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Tobey.UnityAudio;
 internal static class BepinexConfigData
