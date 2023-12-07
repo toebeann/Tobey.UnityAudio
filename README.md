@@ -6,7 +6,7 @@ Includes a BepInEx plugin for in-game configuration with [Configuration Manager]
 
 ## Usage
 
-In most cases you won't need to do much beyond plopping the contents of the downloaded .zip from [the releases page](https://github.com/toebeann/Tobey.UnityAudio/releases) into your game folder (after installing BepInEx, of course).
+In most cases you won't need to do much beyond plopping the contents of the downloaded .zip from [the releases page](https://github.com/toebeann/Tobey.UnityAudio/releases) into your game folder (after installing [BepInEx](https://github.com/BepInEx/BepInEx), of course).
 
 However, in some cases, manual configuration is required. The below configuration options can be edited in-game with [Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) (some options require enabling "Advanced settings" to view them), or by editing the `Tobey.UnityAudio.cfg` file generated in `BepInEx\config`:
 
