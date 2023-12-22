@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/toebeann/Tobey.UnityAudio/main/icon.png"
+</p>
+
 # Tobey's Unity Audio Patcher for BepInEx
 
 A universal BepInEx patcher to enable/disable Unity's built-in audio for any Unity game. Primarily useful for games where Unity's audio engine has been disabled by the game developers due to using a third-party audio engine, such as FMOD.
