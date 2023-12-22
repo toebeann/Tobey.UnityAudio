@@ -12,7 +12,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Plugin", "Plugin\Plugin.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{860CAD40-325A-47F5-9AEA-1D9873902102}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{35DA23AD-B0A2-4B13-89CF-612B528DE8A9}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{F47EDC2F-A62B-4EBE-A84D-184D2B86D7D4}"
+	ProjectSection(SolutionItems) = preProject
+		icon.png = icon.png
+		manifest.json = manifest.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

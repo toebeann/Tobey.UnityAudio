@@ -25,6 +25,15 @@
     <ZipDirectory SourceDirectory="..\bin\zip\" DestinationFile="..\bin\$(RootNamespace).zip" Overwrite="true" />
   </Target>
 
+  <Target Name="ZipThunderstoreBuild" AfterTargets="ZipBuild">
+    <ItemGroup>
+      <ZipBuildItems Include="..\bin\zip\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(ZipBuildItems)" DestinationFolder="..\bin\zip-thunderstore\%(RecursiveDir)" />
+    <Copy SourceFiles="..\CHANGELOG.md;..\icon.png;..\manifest.json;..\README.md" DestinationFolder="..\bin\zip-thunderstore\" />
+    <ZipDirectory SourceDirectory="..\bin\zip-thunderstore\" DestinationFile="..\bin\$(RootNamespace)-thunderstore.zip" Overwrite="true" />
+  </Target>
+
   <ItemGroup>
     <PackageReference Include="BepInEx.Analyzers" Version="1.*" PrivateAssets="all">
       <ExcludeAssets>runtime</ExcludeAssets>
