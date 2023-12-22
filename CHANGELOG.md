@@ -1,5 +1,11 @@
 # Changelog
 
+## [???] - ????-??-??
+
+# Fixed
+
+- Correct a typo in the description of the `RuntimeTesting.PlayAudioFileKeyboardShortcut` config value ([`4eb82c5`](https://github.com/toebeann/Tobey.UnityAudio/commit/4eb82c5f2c276a29e4153c0dbd5abe8a409e87ce))
+
 ## [2.0.1] - 2023-12-22
 
 ### Changed
