@@ -1,9 +1,10 @@
 # Changelog
 
-## [???] - ????-??-??
+## [2.0.2] - 2023-12-22
 
-# Fixed
+### Fixed
 
+- Reset default value for `Patching.ExcludedAssemblies` config value to `string.Empty` ([`856acbe`](https://github.com/toebeann/Tobey.UnityAudio/commit/856acbeb6b687925c21ef38f87d5c955db417600))
 - Correct a typo in the description of the `RuntimeTesting.PlayAudioFileKeyboardShortcut` config value ([`4eb82c5`](https://github.com/toebeann/Tobey.UnityAudio/commit/4eb82c5f2c276a29e4153c0dbd5abe8a409e87ce))
 
 ## [2.0.1] - 2023-12-22
@@ -45,6 +46,7 @@
 
 Initial release 🚀
 
+[2.0.2]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.2
 [2.0.1]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.1
 [2.0.0]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.0
 [1.0.3]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v1.0.3
