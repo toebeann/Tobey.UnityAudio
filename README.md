@@ -64,3 +64,7 @@ Play test audio file on plugin start = false
 # Default value: 
 Play test audio file shortcut = 
 ```
+
+## License
+
+Tobey's Unity Audio Patcher for BepInEx is licensed under the [LGPL-3.0](https://github.com/toebeann/Tobey.UnityAudio/blob/main/LICENSE) license.
