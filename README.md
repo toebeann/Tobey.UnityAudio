@@ -38,8 +38,8 @@ Additional assembly search paths =
 
 ## Comma-separated list of assembly file names to exclude in the search for references to Unity Audio. Ignored if `Patch type` is not set to `Automatic`.
 # Setting type: String
-# Default value: Assembly-CSharp, Assembly-CSharp-firstpass, Assembly-UnityScript, Assembly-UnityScript-firstpass
-Excluded assemblies = Assembly-CSharp, Assembly-CSharp-firstpass, Assembly-UnityScript, Assembly-UnityScript-firstpass
+# Default value: 
+Excluded assemblies = 
 
 ## Comma-separated list of additional fully qualified type names which signify the use of Unity Audio. Ignored if `Patch type` is not set to `Automatic`.
 # Setting type: String

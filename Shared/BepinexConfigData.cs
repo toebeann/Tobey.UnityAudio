@@ -42,7 +42,7 @@ internal static class BepinexConfigData
                 {
                     public static readonly string Name = "Excluded assemblies";
                     public static readonly string Description = $"Comma-separated list of assembly file names to exclude in the search for references to Unity Audio. Ignored if `{PatchType.Name}` is not set to `{UnityAudio.PatchType.Automatic}`.";
-                    public static readonly string DefaultValue = "Assembly-CSharp, Assembly-CSharp-firstpass, Assembly-UnityScript, Assembly-UnityScript-firstpass";
+                    public static readonly string DefaultValue = string.Empty;
                     public static readonly object[] Tags = new[]
                     {
                         new ConfigurationManagerAttributes() { IsAdvanced = true },
