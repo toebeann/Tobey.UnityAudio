@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.1] - 2023-12-22
+
+### Changed
+
+- Add sensible defaults for `Patching.ExcludedAssemblies` config value ([`7ab989e`](https://github.com/toebeann/Tobey.UnityAudio/commit/7ab989e422caeca8f5b347e4a32fbfc133d2c3cd))
+
 ## [2.0.0] - 2023-09-01
 
 ### Changed
@@ -33,6 +39,7 @@
 
 Initial release 🚀
 
+[2.0.1]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.1
 [2.0.0]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.0
 [1.0.3]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v1.0.3
 [1.0.2]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v1.0.2
