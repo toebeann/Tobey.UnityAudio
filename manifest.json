@@ -1,5 +1,5 @@
 {
-  "name": "Tobey's Unity Audio Patcher for BepInEx",
+  "name": "UnityAudio",
   "description": "A universal BepInEx patcher to enable/disable Unity's built-in audio for any Unity game.",
   "version_number": "2.0.0",
   "dependencies": [
