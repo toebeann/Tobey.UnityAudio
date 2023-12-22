@@ -15,7 +15,7 @@ In most cases you won't need to do much beyond plopping the contents of the down
 However, in some cases, manual configuration is required. The below configuration options can be edited in-game with [Configuration Manager](https://github.com/BepInEx/BepInEx.ConfigurationManager) (some options require enabling "Advanced settings" to view them), or by editing the `Tobey.UnityAudio.cfg` file generated in `BepInEx\config`:
 
 ```
-## Settings file was created by plugin Unity Audio Patcher v2.0.0
+## Settings file was created by plugin Unity Audio Patcher v2.0.2
 ## Plugin GUID: Tobey.UnityAudio
 
 [Patching]
@@ -63,7 +63,7 @@ Enabled = true
 # Default value: false
 Play test audio file on plugin start = false
 
-## Keyboard shortcut to play the test audio file on demand. Ignored it `Enabled` is `false`.
+## Keyboard shortcut to play the test audio file on demand. Ignored if `Enabled` is `false`.
 # Setting type: KeyboardShortcut
 # Default value: 
 Play test audio file shortcut = 

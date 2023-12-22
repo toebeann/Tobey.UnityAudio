@@ -92,7 +92,7 @@ internal static class BepinexConfigData
                 public static class PlayAudioFileKeyboardShortcut
                 {
                     public static readonly string Name = "Play test audio file shortcut";
-                    public static readonly string Description = $"Keyboard shortcut to play the test audio file on demand. Ignored it `{Enabled.Name}` is `false`.";
+                    public static readonly string Description = $"Keyboard shortcut to play the test audio file on demand. Ignored if `{Enabled.Name}` is `false`.";
                     public static readonly KeyboardShortcut DefaultValue = KeyboardShortcut.Empty;
                 }
             }
