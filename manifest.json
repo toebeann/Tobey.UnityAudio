@@ -1,7 +1,7 @@
 {
   "name": "UnityAudio",
   "description": "A universal BepInEx patcher to enable/disable Unity's built-in audio for any Unity game.",
-  "version_number": "2.0.2",
+  "version_number": "2.0.3",
   "dependencies": [
     "BepInEx-BepInExPack-5.4.2100"
   ],
