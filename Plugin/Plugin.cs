@@ -6,6 +6,8 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Tobey.UnityAudio.ExtensionMethods;
+using Tobey.UnityAudio.Utilities;
 using UnityEngine;
 
 namespace Tobey.UnityAudio;
@@ -110,7 +112,6 @@ public class Plugin : BaseUnityPlugin
         }
 
         Logger.LogMessage("Attempting to determine the runtime state of Unity Audio...");
-        Logger.LogInfo("You may see warnings from AccessTools about being unable to find methods or types etc. during this operation.");
 
         var path = Path.GetFullPath(Path.Combine(Directory.GetParent(Assembly.GetExecutingAssembly().Location).FullName, audioFilePath.Value));
         if (!File.Exists(path))
@@ -120,7 +121,10 @@ public class Plugin : BaseUnityPlugin
 
         // in newer versions of Unity, UnityWebRequest.GetAudioClip is deprecated in favour of UnityWebRequestMultimedia.GetAudioClip,
         // so use the newer method where available
-        var unityWebRequestMultimedia = new[] { "UnityWebRequestMultimedia", "UnityWebRequest" }.Select(Traverse.CreateWithType).FirstOrDefault(t => t.TypeExists());
+        var unityWebRequestMultimedia = new[] { "UnityWebRequestMultimedia", "UnityWebRequest" }
+            .Select(TraverseHelper.CreateWithOptionalType)
+            .FirstOrDefault(t => t.TypeExists());
+
         if (unityWebRequestMultimedia is null)
         {
             logFailure("UnityEngine.Networking.UnityWebRequest", "type");
@@ -128,7 +132,7 @@ public class Plugin : BaseUnityPlugin
         }
 
         // we need the type of UnityWebRequest on all versions, as this is the type that will be passed to DownloadHandlerAudioClip.GetContent
-        var unityWebRequest = Traverse.CreateWithType("UnityWebRequest");
+        var unityWebRequest = TraverseHelper.CreateWithOptionalType("UnityWebRequest");
         if (!unityWebRequest.TypeExists())
         {
             logFailure("UnityEngine.Networking.UnityWebRequest", "type");
@@ -136,7 +140,7 @@ public class Plugin : BaseUnityPlugin
         }
         Type unityWebRequestType = unityWebRequest.GetValue<Type>();
 
-        var audioType = Traverse.CreateWithType("AudioType");
+        var audioType = TraverseHelper.CreateWithOptionalType("AudioType");
         if (!audioType.TypeExists())
         {
             logFailure("UnityEngine.AudioType", "type");
@@ -144,21 +148,21 @@ public class Plugin : BaseUnityPlugin
         }
         Type audioTypeType = audioType.GetValue<Type>();
 
-        var downloadHandlerAudioClip = Traverse.CreateWithType("DownloadHandlerAudioClip");
+        var downloadHandlerAudioClip = TraverseHelper.CreateWithOptionalType("DownloadHandlerAudioClip");
         if (!downloadHandlerAudioClip.TypeExists())
         {
             logFailure("UnityEngine.Networking.DownloadHandlerAudioClip", "type");
             yield break;
         }
 
-        var getContent = downloadHandlerAudioClip.Method("GetContent", new[] { unityWebRequestType });
+        var getContent = downloadHandlerAudioClip.OptionalMethod("GetContent", new[] { unityWebRequestType });
         if (!getContent.MethodExists())
         {
             logFailure($"{downloadHandlerAudioClip}:GetContent", "static method");
             yield break;
         }
 
-        var getAudioClip = unityWebRequestMultimedia.Method("GetAudioClip", new[] { typeof(string), audioTypeType });
+        var getAudioClip = unityWebRequestMultimedia.OptionalMethod("GetAudioClip", new[] { typeof(string), audioTypeType });
         if (!getAudioClip.MethodExists())
         {
             logFailure($"{unityWebRequestMultimedia}:GetAudioClip", "static method");
@@ -167,7 +171,7 @@ public class Plugin : BaseUnityPlugin
 
         using var disposableRequest = getAudioClip.GetValue<IDisposable>($"file:///{path}", 20); // AudioType.WAV = 20
         var request = Traverse.Create(disposableRequest);
-        var sendWebRequest = new[] { "SendWebRequest", "Send" }.Select(name => request.Method(name)).FirstOrDefault(m => m.MethodExists());
+        var sendWebRequest = new[] { "SendWebRequest", "Send" }.Select(name => request.OptionalMethod(name)).FirstOrDefault(m => m.MethodExists());
         if (sendWebRequest is null)
         {
             logFailure($"{unityWebRequestMultimedia}:SendWebRequest", "instance method");
