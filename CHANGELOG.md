@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.3] - 2024-10-02
+
+### Changed
+
+- Suppress Harmony warnings while checking for optional methods to improve the signal-to-noise ratio in logs ([`ae62dca`](https://github.com/toebeann/Tobey.UnityAudio/commit/ae62dcaa77af1d591c61d9a3527f0d6f2549dbc5))
+
 ## [2.0.2] - 2023-12-22
 
 ### Fixed
@@ -46,6 +52,7 @@
 
 Initial release 🚀
 
+[2.0.3]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.3
 [2.0.2]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.2
 [2.0.1]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.1
 [2.0.0]: https://github.com/toebeann/Tobey.UnityAudio/releases/tag/v2.0.0
