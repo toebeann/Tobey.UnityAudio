@@ -16,7 +16,7 @@ public static class Patcher
 {
     // Without the contents of this region, the patcher will not be loaded by BepInEx - do not remove!
     #region BepInEx Patcher Contract
-    public static IEnumerable<string> TargetDLLs { get; } = Enumerable.Empty<string>();
+    public static IEnumerable<string> TargetDLLs { get; } = [];
     public static void Patch(AssemblyDefinition _) { }
     #endregion
 
@@ -96,7 +96,7 @@ public static class Patcher
                 }
                 catch
                 {   // if we couldn't read the assembly it's probably not a .NET assembly anyway, so just ignore it
-                    return Enumerable.Empty<ModuleDefinition>();
+                    return [];
                 }
             })
             .SelectMany(module => module.GetTypeReferences())
@@ -156,10 +156,10 @@ public static class Patcher
             string tempPath = $"{globalGameManagersPath}.tmp";
             using (var writer = new AssetsFileWriter(tempPath))
             {
-                ggmInstance.file.Write(writer, 0, new List<AssetsReplacer>
-                {
+                ggmInstance.file.Write(writer, 0,
+                [
                     new AssetsReplacerFromMemory(ggmInstance.file, audioManager, baseField)
-                });
+                ]);
             }
             ggmInstance.file.Close(); // close the file so we can overwrite it
             manager.UnloadAll(); // unload the class package etc. as we're done with them

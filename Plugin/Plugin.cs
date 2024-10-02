@@ -155,14 +155,14 @@ public class Plugin : BaseUnityPlugin
             yield break;
         }
 
-        var getContent = downloadHandlerAudioClip.OptionalMethod("GetContent", new[] { unityWebRequestType });
+        var getContent = downloadHandlerAudioClip.OptionalMethod("GetContent", [unityWebRequestType]);
         if (!getContent.MethodExists())
         {
             logFailure($"{downloadHandlerAudioClip}:GetContent", "static method");
             yield break;
         }
 
-        var getAudioClip = unityWebRequestMultimedia.OptionalMethod("GetAudioClip", new[] { typeof(string), audioTypeType });
+        var getAudioClip = unityWebRequestMultimedia.OptionalMethod("GetAudioClip", [typeof(string), audioTypeType]);
         if (!getAudioClip.MethodExists())
         {
             logFailure($"{unityWebRequestMultimedia}:GetAudioClip", "static method");
